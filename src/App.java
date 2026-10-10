@@ -5,12 +5,17 @@ public class App {
         int boardWidth = 600;
         int boardHeight = 600;
 
+
         JFrame frame = new JFrame("Snake");
         frame.setVisible(true);
         frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Snake snakeGame = new Snake(boardWidth, boardHeight);
+        frame.add(snakeGame);
+        frame.pack();
 
 
     }
