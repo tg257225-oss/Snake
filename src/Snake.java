@@ -53,7 +53,7 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
         velocityX = 0;
         velocityY = 0;
 
-        gameLoop = new Timer(75, this);
+        gameLoop = new Timer(90, this);
         gameLoop.start();
     }
 
@@ -81,12 +81,12 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
 
         }
 
-        graphics.setFont(new Font("Arial", Font.PLAIN, 16));
+        graphics.setFont(new Font("SansSerif", Font.PLAIN, 16));
         if(gameOver) {
             graphics.setColor(Color.red);
-            graphics.drawString("Game Over: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            graphics.drawString("GAME OVER! YOUR FINAL SCORE IS: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
         }
-        else graphics.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+        else graphics.drawString("YOUR SCORE: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
     }
 
     public void placeFood() {
