@@ -4,4 +4,4 @@ Snake is a classic desktop snake game made in Java.
 ## Overview
 The game is very simple. You control the green snake using 'WASD' or your arrow keys. Collect the red fruit to grow your snake. Avoid running into the walls of the game or yourself, or else it will result in a 'Game Over!'.
 ## How do I run the game?
-Download the zip folder in the 'Releases' tab. Extract the folder and run the
+Download the zip folder in the 'Releases' tab. Extract the folder and run the 'SnakeGame.exe' file. Then, start playing!
