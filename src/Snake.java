@@ -32,6 +32,7 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
     Timer gameLoop;
     int velocityX;
     int velocityY;
+    boolean gameOver = false;
 
     Snake(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
@@ -76,7 +77,16 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
         for (int i = 0; i < snakeBody.size(); i++) {
             Tile snakePart = snakeBody.get(i);
             graphics.fillRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize);
+
+
         }
+
+        graphics.setFont(new Font("Arial", Font.PLAIN, 16));
+        if(gameOver) {
+            graphics.setColor(Color.red);
+            graphics.drawString("Game Over: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+        }
+        else graphics.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
     }
 
     public void placeFood() {
@@ -110,12 +120,29 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
 
         snakeHead.x += velocityX;
         snakeHead.y += velocityY;
+
+        for(int i = 0; i < snakeBody.size(); i++) {
+            Tile snakePart = snakeBody.get(i);
+
+            if(collision(snakeHead, snakePart)) {
+                gameOver = true;
+            }
+        }
+
+        if(snakeHead.x*tileSize < 0 || snakeHead.x*tileSize > boardWidth ||
+        snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight) {
+            gameOver = true;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         move();
         repaint();
+
+        if(gameOver) {
+            gameLoop.stop();
+        }
     }
 
 
