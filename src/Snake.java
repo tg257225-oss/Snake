@@ -75,7 +75,7 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
 
         for (int i = 0; i < snakeBody.size(); i++) {
             Tile snakePart = snakeBody.get(i);
-            graphics.fillRect(snakePart.x * tileSize, snakePart.x * tileSize, tileSize, tileSize);
+            graphics.fillRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize);
         }
     }
 
@@ -94,6 +94,19 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
             placeFood();
         }
 
+        for (int i = snakeBody.size()-1; i >=0; i--) {
+            Tile snakePart = snakeBody.get(i);
+            if (i == 0) {
+                snakePart.x = snakeHead.x;
+                snakePart.y = snakeHead.y;
+            }
+            else {
+                Tile prevSnakePart = snakeBody.get(i-1);
+                snakePart.x = prevSnakePart.x;
+                snakePart.y = prevSnakePart.y;
+            }
+        }
+
 
         snakeHead.x += velocityX;
         snakeHead.y += velocityY;
@@ -110,19 +123,19 @@ public class Snake extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
+        if ((e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) && velocityY != 1) {
             velocityX = 0;
             velocityY = -1;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN && velocityY != -1) {
+        else if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)&& velocityY != -1) {
             velocityX = 0;
             velocityY = 1;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT && velocityX != 1) {
+        else if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) && velocityX != 1) {
             velocityX = -1;
             velocityY = 0;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
+        else if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && velocityX != -1) {
             velocityX = 1;
             velocityY = 0;
         }
